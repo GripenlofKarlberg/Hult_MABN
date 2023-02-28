@@ -1,6 +1,4 @@
-USE h1b_team_20;
-
-#School projects from the MBAN program at Hult
+-- School projects from the MBAN program at Hult
 
 /* In the h1b project data regarding foreigners applying for a work
 visa in the United States is used. The data is taken from the U.S. 
@@ -18,6 +16,9 @@ However, before the data could be analysed in SQL the dataset was
 cleaned in power query and later uploaded to a Microsoft Azure. 
 */
 
+USE h1b_team_20;
+
+
 /*
 Data Management & SQL - DAT-5486 - BMBAND1
 A2: H1B Visas [Pair/Trio - Timed]
@@ -29,6 +30,13 @@ Geographical areas, East coast & West Coast
 Records for all years, until 2022
 */
  
+
+/*
+Extracting the concentration of job titles on the east and west coast. By filtering 
+for the states on the east and west coast and grouping by the occupation id, occupation
+title, and geographical area and counting occupation id it’s possible to extract the 
+job concentration.
+*/
 SELECT 
     oc.occupation_title,
     COUNT(oc.occupation_id) AS job_concentration,
@@ -59,24 +67,9 @@ FROM
         INNER JOIN
     occupations AS oc USING (occupation_id)
 WHERE
-    ca.worksite_state IN ('MA' , 'ME',
-        'NH',
-        'RI',
-        'CT',
-        'NY',
-        'NJ',
-        'DE',
-        'MD',
-        'VA',
-        'NC',
-        'SC',
-        'GA',
-        'FL',
-        'AK',
-        'CA',
-        'HI',
-        'OR',
-        'WA')
+    ca.worksite_state IN ('MA' , 'ME', 'NH','RI','CT','NY','NJ','DE','MD','VA',
+        'NC','SC','GA','FL','AK','CA','HI','OR','WA')
+        
 GROUP BY oc.occupation_id , occupation_title , geographical_areas
 ORDER BY job_concentration DESC
 LIMIT 10
@@ -84,7 +77,9 @@ LIMIT 10
 
 /*
 QUESTION: Are there certain types of jobs concentrated in certain geographical areas?
-The variation of this question is focused in analyze the concentration of jobs into the west & east cost, specifically within the Health Care, Tech & finance industries, for the years between 2021 and 2022. This to get specific information according to customer requirements
+The variation of this question is focused in analyze the concentration of jobs into the 
+west & east cost, specifically within the Health Care, Tech & finance industries, for 
+the years between 2021 and 2022. This to get specific information according to customer requirements
 */
  
 SELECT 
@@ -119,24 +114,8 @@ FROM
         INNER JOIN
     industries AS ind USING (industry_id)
 WHERE
-    ca.worksite_state IN ('MA' , 'ME',
-        'NH',
-        'RI',
-        'CT',
-        'NY',
-        'NJ',
-        'DE',
-        'MD',
-        'VA',
-        'NC',
-        'SC',
-        'GA',
-        'FL',
-        'AK',
-        'CA',
-        'HI',
-        'OR',
-        'WA')
+    ca.worksite_state IN ('MA' , 'ME','NH','RI','CT','NY','NJ','DE','MD','VA',
+        'NC','SC','GA','FL','AK','CA','HI','OR','WA')
         AND ind.definition IN ('Finance and Insurance' , 'Professional, Scientific, and Technical Services',
         'Health Care and Social Assistance')
         AND application_year IN (2021 , 2022)
@@ -146,7 +125,8 @@ LIMIT 10
 ;
 
 /*
-Is there an outlier within the salary range of Healthcare Practitioners and Technical Occupations between states?
+Is there an outlier within the salary range of Healthcare Practitioners and 
+Technical Occupations between states?
 */
 SELECT 
     MAX(yearly_wage) AS max_range,
