@@ -1,3 +1,20 @@
+/*
+Project intro: 
+
+In the h1b project data regarding foreigners applying for a work visa in the United States
+is used. The data is taken from the U.S. Citizenship and Immigration Services.
+
+The idea behind the project was to modify and analyze the data to write a recommendation
+for a fictional client looking to get employed in the US. Before any data analysis, a profile
+was created for the client, age, professional background, education level, and which industry
+the individual would like to enter. Knowing the client, the necessary queries could be written
+and an appropriate recommendation could be written based on the data analyzed from the queries 
+outputs.
+
+However, before the data could be analysed in SQL the dataset was cleaned in power query and 
+later uploaded to a Microsoft Azure 
+*/
+
 USE h1b_team_20;
 
 /*
@@ -10,7 +27,14 @@ QUESTION: Are there certain types of jobs concentrated in certain geographical a
 Geographical areas, East coast & West Coast
 Records for all years, until 2022
 */
- 
+
+
+/*
+Extracting the concentration of job titles on the east and west coast. By filtering for
+the states on the east and west coast and grouping by the occupation id, occupation 
+title, and geographical area and counting occupation id it’s possible to extract the 
+job concentration.
+*/
 SELECT 
     oc.occupation_title,
     COUNT(oc.occupation_id) AS job_concentration,
@@ -41,24 +65,8 @@ FROM
         INNER JOIN
     occupations AS oc USING (occupation_id)
 WHERE
-    ca.worksite_state IN ('MA' , 'ME',
-        'NH',
-        'RI',
-        'CT',
-        'NY',
-        'NJ',
-        'DE',
-        'MD',
-        'VA',
-        'NC',
-        'SC',
-        'GA',
-        'FL',
-        'AK',
-        'CA',
-        'HI',
-        'OR',
-        'WA')
+    ca.worksite_state IN ('MA' , 'ME','NH','RI','CT','NY','NJ','DE','MD',
+                          'VA','NC','SC','GA','FL','AK','CA','HI','OR','WA')
 GROUP BY oc.occupation_id , occupation_title , geographical_areas
 ORDER BY job_concentration DESC
 LIMIT 10
@@ -101,24 +109,8 @@ FROM
         INNER JOIN
     industries AS ind USING (industry_id)
 WHERE
-    ca.worksite_state IN ('MA' , 'ME',
-        'NH',
-        'RI',
-        'CT',
-        'NY',
-        'NJ',
-        'DE',
-        'MD',
-        'VA',
-        'NC',
-        'SC',
-        'GA',
-        'FL',
-        'AK',
-        'CA',
-        'HI',
-        'OR',
-        'WA')
+    ca.worksite_state IN ('MA' , 'ME','NH','RI','CT','NY','NJ','DE','MD',
+                          'VA','NC','SC','GA','FL','AK','CA','HI','OR','WA')
         AND ind.definition IN ('Finance and Insurance' , 'Professional, Scientific, and Technical Services',
         'Health Care and Social Assistance')
         AND application_year IN (2021 , 2022)
