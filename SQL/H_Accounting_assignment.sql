@@ -4,7 +4,7 @@ Project intro:
 In the H_Accounting Assignment data regarding a fictional company was provided. 
 The Schema provided contained 23 tables. The tables contained information regarding
 the company’s different accounts, report order, journal entries company addresses,
-and much more. However , most tables were identified as noise for the assignment.
+and much more. However, most tables were identified as noise for the assignment.
 The only tables used were the journal entry line item, account, journal entry,
 and statement section.
 
