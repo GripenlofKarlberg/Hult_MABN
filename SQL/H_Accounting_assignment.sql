@@ -15,6 +15,11 @@ created. The user input allows the user to insert a year present in the dataset 
 the tmp table would be created based on that year.
 */
 
+/*
+Business Analysis with Structured Data
+A2: H_Accounting [Pairs/Trios]
+Aouthers: Axel Gripenlöf Karlberg, Adrian Lopez Perales, Megan Bierfert
+*/
 
 USE h_accounting;
 
