@@ -1,3 +1,21 @@
+/*
+Project intro:
+
+In the H_Accounting Assignment data regarding a fictional company was provided. 
+The Schema provided contained 23 tables. The tables contained information regarding
+the company’s different accounts, report order, journal entries company addresses,
+and much more. However , most tables were identified as noise for the assignment.
+The only tables used were the journal entry line item, account, journal entry,
+and statement section.
+
+The Aim of the assignment was to create profit and loss as well as balance sheet
+statements for the company and insert the results into temporary tables (tmp) tables
+through a stored procedure. When creating the stored procedure a user input was also
+created. The user input allows the user to insert a year present in the dataset and 
+the tmp table would be created based on that year.
+*/
+
+
 USE h_accounting;
 
 -- DROPING PROCEDURE IF IT EXISTS IN ORDER TO REPLACE ANY CURRENT PROCEDURE WITH THE SAME NAME
